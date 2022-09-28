@@ -34,13 +34,26 @@ class Blockchain(object):
     def mineProofOfWork(self, block):
         '''Retorna um nonce válido para o bloco passado como argumento.'''
         # TODO Implemente seu código aqui.
+        nonce=0
+        valido = False
+        #while hash_gerado.startswith('0000') != True:
+        while valido != True:
+            valido = self.isValidProof(block, nonce)
+            nonce +=1
+
+
         return nonce
 
     @staticmethod
     def isValidProof(block, nonce):
         '''Retorna `True` caso o nonce passado como argumento seja válido para o block passado como argumento, `False` caso contrário.'''
         # TODO Implemente seu código aqui.
-        return False
+        block['nonce'] = nonce
+        hash_gerado = Blockchain.generateHash(block)
+        if hash_gerado.startswith('0000') == True:
+            return True
+        else:
+            return False
 
     @staticmethod
     def generateHash(data):
@@ -65,11 +78,16 @@ class Blockchain(object):
         return self.chain[-1]
 
 
-# Teste local, fique a vontade para modificar.
-blockchain = Blockchain()
-for x in range(0, 4):
-    blockchain.createBlock()
-    blockchain.mineProofOfWork(blockchain.prevBlock)
 
-for x in blockchain.chain:
-    print('[Bloco #{} : {}] Nonce: {} | É válido? {}'.format(x['index'], Blockchain.getBlockID(x), x['nonce'], Blockchain.isValidProof(x, x['nonce'])))
+if __name__ == '__main__':
+    #incrementar nonce e validar se resolveu
+    # Teste local, fique a vontade para modificar.
+    blockchain = Blockchain()
+    for x in range(0, 4):
+        blockchain.createBlock()
+        blockchain.mineProofOfWork(blockchain.prevBlock)
+
+    for x in blockchain.chain:
+        print('[Bloco #{} : {}] Nonce: {} | É válido? {}'.format(x['index'], Blockchain.getBlockID(x), x['nonce'],
+                                                                 Blockchain.isValidProof(x, x['nonce'])))
+    print('fim')
