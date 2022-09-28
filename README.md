@@ -1,3 +1,4 @@
+![Open in Codespaces](https://classroom.github.com/assets/open-in-codespaces-abfff4d4e15f9e1bd8274d9a39a0befe03a0632bb0f153d0ec72ff541cedbe34.svg)
 # Atividade: Proof-of-Work (`03-pow`)
 
 Esta atividade tem como objetivo implementar o algoritmo responsável por minerar um novo bloco ao encontrar um *nonce* válido para os dados de entrada (*proof-of-work*), considerando uma dificuldade fixa.
